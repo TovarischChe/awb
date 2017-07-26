@@ -8,6 +8,7 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
 /**
  * Env
@@ -70,7 +71,7 @@ module.exports = function makeWebpackConfig() {
    */
   config.resolve = {
     // only discover files that have those extensions
-    extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
+    extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html', '.pug'],
   };
 
   var atlOptions = '';
@@ -208,28 +209,27 @@ module.exports = function makeWebpackConfig() {
     })
   ];
 
-  if (!isTest && !isTestWatch) {
-    config.plugins.push(
+  config.plugins.push(
       // Generate common chunks if necessary
       // Reference: https://webpack.github.io/docs/code-splitting.html
       // Reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
       new CommonsChunkPlugin({
-        name: ['vendor', 'polyfills']
+          name: ['vendor', 'polyfills']
       }),
 
       // Inject script and link tags into html files
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        template: './src/public/index.html',
-        chunksSortMode: 'dependency'
+          template: './src/index.html',
+          chunksSortMode: 'dependency'
       }),
 
-      // Extract css files
-      // Reference: https://github.com/webpack/extract-text-webpack-plugin
-      // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin({filename: 'css/[name].[hash].css', disable: !isProd})
-    );
-  }
+      new HtmlWebpackIncludeAssetsPlugin({
+          assets: ['app.css'],
+          append: true,
+          hash: true
+      })
+  );
 
   // Add build specific plugins
   if (isProd) {
@@ -241,16 +241,15 @@ module.exports = function makeWebpackConfig() {
       // // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
       // // Dedupe modules in the output
       // new webpack.optimize.DedupePlugin(),
-
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
-      new webpack.optimize.UglifyJsPlugin({sourceMap: true, mangle: { keep_fnames: true }}),
+      new webpack.optimize.UglifyJsPlugin({sourceMap: true, mangle: { keep_fnames: true }})
 
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
-      new CopyWebpackPlugin([{
-        from: root('src/public')
-      }])
+      // new CopyWebpackPlugin([{
+      //   from: root('src/static')
+      // }])
     );
   }
 
@@ -260,7 +259,7 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/webpack-dev-server.html
    */
   config.devServer = {
-    contentBase: './src/public',
+    contentBase: './web',
     historyApiFallback: true,
     quiet: true,
     stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
