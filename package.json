@@ -8,7 +8,7 @@
     "clean-start": "npm run clean-install && npm start",
     "watch": "webpack --watch --progress --profile",
     "build": "rimraf dist && webpack --progress --profile --bail",
-    "server": "webpack-dev-server --inline --progress --port 8080",
+    "server": "webpack-dev-server --devtool --inline --devtool --hot --progress --port 8080",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "lint": "tslint --force \"src/**/*.ts\"",
@@ -25,11 +25,14 @@
     "postinstall": "npm run webdriver-update"
   },
   "dependencies": {
+    "@angular/animations": "^4.3.1",
+    "@angular/cdk": "^2.0.0-beta.8",
     "@angular/common": "~4.2.6",
     "@angular/compiler": "~4.2.6",
     "@angular/core": "~4.2.6",
     "@angular/forms": "~4.2.6",
     "@angular/http": "~4.2.6",
+    "@angular/material": "^2.0.0-beta.8",
     "@angular/platform-browser": "~4.2.6",
     "@angular/platform-browser-dynamic": "~4.2.6",
     "@angular/router": "~4.2.6",
