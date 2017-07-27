@@ -59,7 +59,7 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/configuration.html#output
    */
   config.output = isTest ? {} : {
-    path: root('dist'),
+    path: root('web'),
     publicPath: isProd ? '/' : 'http://localhost:8080/',
     filename: isProd ? 'js/[name].[hash].js' : 'js/[name].js',
     chunkFilename: isProd ? '[id].[hash].chunk.js' : '[id].chunk.js'
@@ -109,11 +109,11 @@ module.exports = function makeWebpackConfig() {
       // all css in src/style will be bundled in an external css file
       {
         test: /\.css$/,
-        exclude: root('src', 'app'),
+        exclude: root('src', 'static'),
         loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader']})
       },
       // all css required in src/app files will be merged in js files
-      {test: /\.css$/, include: root('src', 'app'), loader: 'raw-loader!postcss-loader'},
+      {test: /\.css$/, exclude: root('src', 'static'), loader: 'raw-loader!postcss-loader'},
 
       // support for .scss files
       // use 'null' loader in test mode (https://github.com/webpack/null-loader)
@@ -124,13 +124,13 @@ module.exports = function makeWebpackConfig() {
         loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader', 'sass-loader']})
       },
       // all css required in src/app files will be merged in js files
-      {test: /\.(scss|sass)$/, exclude: root('src', 'style'), loader: 'raw-loader!postcss-loader!sass-loader'},
+      {test: /\.(scss|sass)$/, exclude: root('src', 'static'), loader: 'raw-loader!postcss-loader!sass-loader'},
 
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
-      {test: /\.html$/, loader: 'raw-loader',  exclude: root('src', 'public')},
+      {test: /\.html$/, loader: 'raw-loader',  exclude: root('src', 'static')},
 
-      {test: /\.pug$/, loader: 'raw-loader!pug-html-loader',  exclude: root('src', 'public')}
+      {test: /\.pug$/, loader: 'raw-loader!pug-html-loader',  exclude: root('src', 'static')}
     ]
   };
 
@@ -202,34 +202,35 @@ module.exports = function makeWebpackConfig() {
          */
         postcss: [
           autoprefixer({
-            browsers: ['last 2 version']
+            browsers: ['last 3 version']
           })
         ]
       }
-    })
+    }),
+
+    // Extract css files
+    // Reference: https://github.com/webpack/extract-text-webpack-plugin
+    // Disabled when in test mode or not in build mode
+    new ExtractTextPlugin({filename: 'css/[name].[hash].css'})
   ];
 
-  config.plugins.push(
+  if (!isTest && !isTestWatch) {
+    config.plugins.push(
       // Generate common chunks if necessary
       // Reference: https://webpack.github.io/docs/code-splitting.html
       // Reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
       new CommonsChunkPlugin({
-          name: ['vendor', 'polyfills']
+        name: ['vendor', 'polyfills']
       }),
 
       // Inject script and link tags into html files
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-          template: './src/index.html',
-          chunksSortMode: 'dependency'
-      }),
-
-      new HtmlWebpackIncludeAssetsPlugin({
-          assets: ['app.css'],
-          append: true,
-          hash: true
+        template: './src/index.pug',
+        chunksSortMode: 'dependency'
       })
-  );
+    );
+  }
 
   // Add build specific plugins
   if (isProd) {
@@ -243,13 +244,14 @@ module.exports = function makeWebpackConfig() {
       // new webpack.optimize.DedupePlugin(),
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
-      new webpack.optimize.UglifyJsPlugin({sourceMap: true, mangle: { keep_fnames: true }})
+      new webpack.optimize.UglifyJsPlugin({sourceMap: true, mangle: { keep_fnames: true }}),
 
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
-      // new CopyWebpackPlugin([{
-      //   from: root('src/static')
-      // }])
+      new CopyWebpackPlugin([
+        { from: root('src/static') },
+        { from: root('node_modules/font-awesome/fonts'), to: root('src/static') }
+      ])
     );
   }
 

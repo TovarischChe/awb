@@ -1,7 +1,5 @@
-nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
-  button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-    span.navbar-toggler-icon
-  a.navbar-brand(href='#')
+nav.navbar.navbar-inverse.bg-inverse.fixed-top
+  a.navbar-brand(href='/')
     strong С
     span.hidden-md-down="трана "
     strong С
@@ -10,3 +8,8 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
     span.hidden-md-down="лучайных "
     strong С
     span.hidden-md-down="овпадений"
+  .navbar-nav.mr-auto
+    form.form-inline
+      input.form-control.mr-sm-2(type="text" placeholder="Search")
+      button.btn.btn-outline-success.my-2.my-sm-0(type="submit")
+        i.fa.fa-search
