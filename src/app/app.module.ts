@@ -8,7 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
 
-import { MdToolbarModule } from '@angular/material';
+import { MdToolbarModule, MdIconModule } from '@angular/material';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -18,6 +18,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     HttpModule,
     FormsModule,
     MdToolbarModule,
+    MdIconModule,
     routing
   ],
   declarations: [
