@@ -1,13 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One&subset=cyrillic');
-// @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
-
-@import "~@angular/material/_theming"
-@include mat-core()
-$ssss-primary: mat-palette($mat-grey, 900)
-$ssss-accent:  mat-palette($mat-indigo, 700, A200)
-$ssss-warn:    mat-palette($mat-deep-orange)
-$ssss-theme: mat-light-theme($ssss-primary, $ssss-accent, $ssss-warn)
-@include angular-material-theme($ssss-theme)
+@import 'imports'
+@import 'angular-material'
 
 @keyframes letters-loading
     0%

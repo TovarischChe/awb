@@ -250,7 +250,7 @@ module.exports = function makeWebpackConfig() {
       // Reference: https://github.com/kevlened/copy-webpack-plugin
       new CopyWebpackPlugin([
         { from: root('src/static') },
-        { from: root('node_modules/font-awesome/fonts'), to: root('src/static') }
+        { from: root('node_modules/font-awesome/fonts'), to: root('src/static/font-awesome') }
       ])
     );
   }

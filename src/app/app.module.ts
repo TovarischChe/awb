@@ -4,11 +4,14 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MainDialogComponent } from './components/main-dialog/main-dialog.component';
+import { NewsListComponent } from './components/news-list/news-list.component';
+
 import { ApiService } from './shared';
 import { routing } from './app.routing';
 
-import { MdToolbarModule, MdIconModule } from '@angular/material';
+import { MdToolbarModule, MdIconModule, MdListModule, MdIconRegistry } from '@angular/material';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -19,11 +22,14 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     FormsModule,
     MdToolbarModule,
     MdIconModule,
+    MdListModule,
     routing
   ],
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    MainDialogComponent,
+    NewsListComponent
   ],
   providers: [
     ApiService
@@ -31,7 +37,9 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef) {}
+  constructor(public appRef: ApplicationRef, mdIconRegistry: MdIconRegistry) {
+    mdIconRegistry.setDefaultFontSetClass('fa');
+  }
   hmrOnInit(store) {
     console.log('HMR store', store);
   }

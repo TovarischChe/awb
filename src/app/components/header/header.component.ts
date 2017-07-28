@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
+  selector: 'ac-header',
   templateUrl: './header.component.pug',
   styleUrls: ['./header.component.sass']
 })
@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Header component');
+    // console.log('Header component');
   }
 
 }
