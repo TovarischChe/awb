@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { ApiService } from './shared';
 
+// import { UIView } from '@uirouter/angular';
+
 import '../static/styles/app.sass';
 
 @Component({

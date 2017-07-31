@@ -17,7 +17,6 @@ export class MainDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log('Header component');
   }
 
 }
