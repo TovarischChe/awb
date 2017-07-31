@@ -1,4 +1,4 @@
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule, ApplicationRef, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
@@ -8,12 +8,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { MainDialogComponent } from './components/main-dialog/main-dialog.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
 
-import { ApiService } from './shared';
-import { routing } from './app.routing';
+import { ApiService } from './shared/api.service';
+import { trace, Category, UIRouterModule, UIView } from '@uirouter/angular';
+import { routes } from './app.routing';
 
 import { MdToolbarModule, MdIconModule, MdListModule, MdIconRegistry } from '@angular/material';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
+
+trace.enable(Category.TRANSITION, Category.VIEWCONFIG);
 
 @NgModule({
   imports: [
@@ -23,7 +26,11 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     MdToolbarModule,
     MdIconModule,
     MdListModule,
-    routing
+    UIRouterModule.forRoot({
+      states: routes,
+      otherwise: { state: 'app', params: {} },
+      useHash: false,
+    }),
   ],
   declarations: [
     AppComponent,
@@ -32,9 +39,10 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     NewsListComponent
   ],
   providers: [
-    ApiService
+    ApiService,
+    { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [UIView]
 })
 export class AppModule {
   constructor(public appRef: ApplicationRef, mdIconRegistry: MdIconRegistry) {

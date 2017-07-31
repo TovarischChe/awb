@@ -130,7 +130,7 @@ module.exports = function makeWebpackConfig() {
       // todo: change the loader to something that adds a hash to images
       {test: /\.html$/, loader: 'raw-loader',  exclude: root('src', 'static')},
 
-      {test: /\.pug$/, loader: 'raw-loader!pug-html-loader',  exclude: root('src', 'static')}
+      {test: /\.pug$/, loader: 'pug-ng-html-loader',  exclude: root('src', 'static')}
     ]
   };
 
@@ -244,7 +244,27 @@ module.exports = function makeWebpackConfig() {
       // new webpack.optimize.DedupePlugin(),
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
-      new webpack.optimize.UglifyJsPlugin({sourceMap: true, mangle: { keep_fnames: true }}),
+      new webpack.optimize.UglifyJsPlugin({
+          sourceMap: true,
+          beautify: false,
+          mangle: {
+            keep_fnames: true,
+            screw_ie8: true
+          },
+          compress: {
+            screw_ie8: true,
+            warnings: false,
+            conditionals: true,
+            unused: true,
+            comparisons: true,
+            sequences: true,
+            dead_code: true,
+            evaluate: true,
+            if_return: true,
+            join_vars: true,
+            negate_iife: false
+          }
+      }),
 
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin

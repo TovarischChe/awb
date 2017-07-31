@@ -1,11 +1,11 @@
-import { RouterModule, Routes } from '@angular/router';
-
+import { AppComponent } from './app.component';
 import { MainDialogComponent } from './components/main-dialog/main-dialog.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
 
-const routes: Routes = [
-    { path: '', component: NewsListComponent, pathMatch: 'full' },
-    { path: 'news/:code', component: MainDialogComponent }
-];
+import { Ng2StateDeclaration } from '@uirouter/angular';
 
-export const routing = RouterModule.forRoot(routes);
+export let routes: Ng2StateDeclaration[] = [
+    { name: 'app', component: AppComponent },
+    { name: 'app.news', url: '^/', component: NewsListComponent },
+    { name: 'app.news.detail', url: 'news/:articleCode', component: MainDialogComponent }
+];
