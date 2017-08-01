@@ -42,6 +42,7 @@ Thumbs.db
 
 # Dist #
 /dist
+/web
 /public/__build__/
 /src/*/__build__/
 __build__/**
@@ -53,3 +54,6 @@ __build__/**
 # IDE #
 .idea/
 *.swp
+
+# Temp files #
+src/static/font-awesome
