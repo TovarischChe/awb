@@ -17,6 +17,8 @@ import { states } from './app.routing';
 import { MdToolbarModule, MdIconModule, MdListModule, MdIconRegistry, MdDialogModule, MdButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
 @NgModule({
@@ -24,6 +26,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     BrowserModule,
     HttpModule,
     FormsModule,
+    NgbModule.forRoot(),
     MdToolbarModule, MdIconModule, MdListModule, MdDialogModule, MdButtonModule,
     BrowserAnimationsModule,
     UIRouterModule.forRoot({

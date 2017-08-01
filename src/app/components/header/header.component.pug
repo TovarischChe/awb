@@ -1,13 +1,16 @@
-md-toolbar.app-header(color="primary")
-  .app-header__logo(uiSref="app.news")
-    strong С
-    span.hidden-md-down="трана "
-    strong С
-    span.hidden-md-down="овершенно "
-    strong С
-    span.hidden-md-down="лучайных "
-    strong С
-    span.hidden-md-down="овпадений"
-  .app-header__search
-    form
-      md-icon.fa-search
+nav.navbar.navbar-inverse.bg-inverse.app-header.d-flex.flex-row.justify-content-between.align-items-start
+  .app-header__logo
+    a.navbar-brand(uiSref="app.news")
+      strong С
+      span.hidden-md-down="трана "
+      strong С
+      span.hidden-md-down="овершенно "
+      strong С
+      span.hidden-md-down="лучайных "
+      strong С
+      span.hidden-md-down="овпадений"
+  .app-header__aside
+    form.form-inline.app-header__search-form
+      input.form-control(type='text', placeholder='Search')
+      button.btn
+       i.fa.fa-search

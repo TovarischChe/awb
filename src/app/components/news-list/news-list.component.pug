@@ -1,5 +1,3 @@
-md-list
-  md-list-item(*ngFor='let article of news')
-    h3(md-line)
-      a(uiSref=".detail" [uiParams]="{ articleCode: article.code }" uiSrefActive="active") {{article.name}}
-//ui-view
+.container
+  .list-group
+    a.list-group-item.list-group-item-action(*ngFor='let article of news' uiSref=".detail" [uiParams]="{ articleCode: article.code }" uiSrefActive="active") {{article.name}}

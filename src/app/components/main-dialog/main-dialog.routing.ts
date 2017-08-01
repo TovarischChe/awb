@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { MainDialogComponent } from './main-dialog.component';
 
 export const routes = [
@@ -9,8 +10,6 @@ export const routes = [
         component: MainDialogComponent
       }
     },
-    onEnter: (transition, state) => {
-      console.log('onEnter', state.name);
-    }
   }
 ];
+/* tslint:enable */
