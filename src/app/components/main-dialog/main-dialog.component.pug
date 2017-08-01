@@ -1,2 +1,6 @@
-| {{ article.name }}
-img([src]="article.image.url")
+h2(md-dialog-title='') {{ article.name }}
+md-dialog-content
+  img([src]="article.image.url")
+md-dialog-actions
+  button(md-button='', [md-dialog-close]='true') Ok
+//| {{ article.name }}

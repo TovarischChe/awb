@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { MainDialogComponent } from './components/main-dialog/main-dialog.component';
+import { MainDialogComponent, MainDialogInnerComponent } from './components/main-dialog/main-dialog.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { ErrorComponent } from './components/error/error.component';
 
@@ -14,7 +14,8 @@ import { ApiService } from './shared';
 import { UIRouterModule, UIView } from '@uirouter/angular';
 import { states } from './app.routing';
 
-import { MdToolbarModule, MdIconModule, MdListModule, MdIconRegistry } from '@angular/material';
+import { MdToolbarModule, MdIconModule, MdListModule, MdIconRegistry, MdDialogModule, MdButtonModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -23,19 +24,21 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     BrowserModule,
     HttpModule,
     FormsModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdListModule,
+    MdToolbarModule, MdIconModule, MdListModule, MdDialogModule, MdButtonModule,
+    BrowserAnimationsModule,
     UIRouterModule.forRoot({
       states,
       useHash: false
     })
   ],
+  entryComponents: [
+    MainDialogInnerComponent
+  ],
   declarations: [
     AppComponent,
     ErrorComponent,
     HeaderComponent,
-    MainDialogComponent,
+    MainDialogComponent, MainDialogInnerComponent,
     NewsListComponent,
   ],
   providers: [

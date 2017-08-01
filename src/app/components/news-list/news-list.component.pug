@@ -2,4 +2,4 @@ md-list
   md-list-item(*ngFor='let article of news')
     h3(md-line)
       a(uiSref=".detail" [uiParams]="{ articleCode: article.code }" uiSrefActive="active") {{article.name}}
-ui-view
+//ui-view

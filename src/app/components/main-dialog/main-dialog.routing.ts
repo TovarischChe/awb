@@ -4,6 +4,13 @@ export const routes = [
   {
     name: 'app.news.detail',
     url: 'news/:articleCode',
-    component: MainDialogComponent
+    views: {
+      'main-dialog@app': {
+        component: MainDialogComponent
+      }
+    },
+    onEnter: (transition, state) => {
+      console.log('onEnter', state.name);
+    }
   }
 ];
