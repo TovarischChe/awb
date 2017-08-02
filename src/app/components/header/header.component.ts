@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent implements OnInit {
+  searchVisible = false;
 
   constructor() {
     // Do stuff
@@ -13,6 +14,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     // console.log('Header component');
+  }
+
+  toggleSearchField(event) {
+    this.searchVisible = !this.searchVisible;
   }
 
 }

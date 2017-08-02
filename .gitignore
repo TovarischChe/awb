@@ -56,4 +56,4 @@ __build__/**
 *.swp
 
 # Temp files #
-src/static/font-awesome
+src/static/fonts
