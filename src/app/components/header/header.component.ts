@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     // console.log('Header component');
   }
 
-  toggleSearchField(event) {
+  toggleSearchField() {
     this.searchVisible = !this.searchVisible;
   }
 

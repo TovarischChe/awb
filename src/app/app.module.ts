@@ -14,7 +14,6 @@ import { ApiService } from './shared';
 import { UIRouterModule, UIView } from '@uirouter/angular';
 import { states } from './app.routing';
 
-import { MdToolbarModule, MdIconModule, MdListModule, MdIconRegistry, MdDialogModule, MdButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,7 +26,6 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     HttpModule,
     FormsModule,
     NgbModule.forRoot(),
-    MdToolbarModule, MdIconModule, MdListModule, MdDialogModule, MdButtonModule,
     BrowserAnimationsModule,
     UIRouterModule.forRoot({
       states,
@@ -51,8 +49,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   bootstrap: [UIView]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef, mdIconRegistry: MdIconRegistry) {
-    mdIconRegistry.setDefaultFontSetClass('fa');
+  constructor(public appRef: ApplicationRef) {
   }
   hmrOnInit(store) {
     console.log('HMR store', store);
