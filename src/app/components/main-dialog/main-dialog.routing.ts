@@ -10,6 +10,10 @@ export const routes = [
         component: MainDialogComponent
       }
     },
+    // onEnter: (transition, state) => {
+    //   debugger
+    //   console.log(transition, state)
+    // }
   }
 ];
 /* tslint:enable */

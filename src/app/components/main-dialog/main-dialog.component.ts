@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UIRouter } from '@uirouter/angular';
+import { UIRouter, Transition, StateService } from '@uirouter/angular';
 
 @Component({
   selector: 'ac-main-dialog',
@@ -9,23 +9,30 @@ import { UIRouter } from '@uirouter/angular';
 export class MainDialogComponent implements OnInit {
   dialogRef = {};
 
-  constructor(private modalService: NgbModal) {
-  }
+  constructor(private modalService: NgbModal, private transition: Transition, private stateService: StateService) {}
 
   ngOnInit() {
     this.dialogRef = this.modalService.open(
       MainDialogInnerComponent,
       {
-        size: 'lg'
+        size: 'lg',
       }
-    );
+    ).result.then(() => {
+      if (this.transition.from().name) {
+        this.stateService.go(this.transition.from().name, {notify: false, reload: false});
+      } else {
+        this.stateService.go('^', {notify: false, reload: false});
+      }
+    }).catch(() => {
+      this.stateService.go('^', {notify: false, reload: false});
+    });
   }
 }
 
 @Component({
   selector: 'ac-main-dialog-inner',
   templateUrl: './main-dialog.component.pug',
-  styles: ["img {max-width: 100%}"]
+  styles: ['img {max-width: 100%}']
 })
 export class MainDialogInnerComponent {
   article = {};
@@ -49,11 +56,10 @@ export class MainDialogInnerComponent {
   constructor(public activeModal: NgbActiveModal, private uiRouter: UIRouter) {
     this.article = this.news.find(el => {
       return el.code === this.uiRouter.globals.params.articleCode;
-    })
+    });
   }
 
   closeModal() {
-    this.activeModal.dismiss('Cross click');
-    console.debug(this.uiRouter)
+    this.activeModal.dismiss();
   }
 }
