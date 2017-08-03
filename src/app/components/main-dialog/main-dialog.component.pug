@@ -1,6 +1,6 @@
-h2(md-dialog-title='') {{ article.name }}
-md-dialog-content
-  img([src]="article.image.url")
-md-dialog-actions
-  button(md-button='', [md-dialog-close]='true') Ok
-//| {{ article.name }}
+.modal-header
+  h4.modal-title {{ article.name }}
+  button.close(type='button', aria-label='Close', (click)="closeModal()")
+    span(aria-hidden='true') ×
+.modal-body
+  img([src]='article.image.url')
