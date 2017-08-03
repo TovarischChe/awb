@@ -10,9 +10,8 @@
       text-transform: uppercase
   &__aside
     display: inline-block
-  &__search-form
-    .btn
-      position: relative
+  &__search
+    &-toggler
       border-radius: 100%
       width: 2.25em
       height: 2.25em
@@ -43,15 +42,9 @@
 
 @keyframes letters-loading
     0%
-      color: white
-    25%
-      color: red
-    50%
-      color: red
-    75%
-      color: red
+      box-shadow: 0 0 1px 0 $teal
     100%
-      color: white
+      box-shadow: 0 0 50px 50px $teal
 
 .fullscreen-loader
   position: fixed
@@ -59,18 +52,17 @@
   bottom: 0
   left: 0
   right: 0
-  background: rgba(0, 0, 0, 0.5)
   z-index: 1050
-  &__letters
+  &:after
     position: absolute
-    text-align: center
-    width: 100%
+    content: ''
+    display: block
+    width: 2px
+    height: 2px
+    margin-top: -1px
+    margin-left: -1px
+    background: $teal
     top: 50%
-    margin-top: -40px
-    line-height: 40px
-    font-size: 40px
-    font-family: 'Rubik Mono One', sans-serif
-    text-transform: uppercase
-    animation-name: letters-loading
-    animation-duration: 2s
-    animation-iteration-count: infinite
+    left: 50%
+    border-radius: 100%
+    animation: letters-loading 2s infinite

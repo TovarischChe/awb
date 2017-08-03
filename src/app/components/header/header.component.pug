@@ -1,18 +1,22 @@
-nav.navbar.navbar-inverse.bg-inverse.app-header.d-flex.flex-row.justify-content-between.align-items-start(
+nav.navbar.navbar-inverse.bg-inverse.app-header(
   [class.--search-visible]='searchVisible'
 )
-  .app-header__logo
-    a.navbar-brand(uiSref="app.news")
-      strong С
-      span.hidden-md-down="трана "
-      strong С
-      span.hidden-md-down="овершенно "
-      strong С
-      span.hidden-md-down="лучайных "
-      strong С
-      span.hidden-md-down="овпадений"
-  .app-header__aside
-    form.form-inline.app-header__search-form
-      input.form-control(type='text', placeholder='Поиск...')
-      button.btn.btn-secondary((click)='toggleSearchField($event)')
-       i.fa.fa-search
+  .d-flex.flex-row.justify-content-between.align-items-start
+    .app-header__logo
+      a.navbar-brand(uiSref="app.news")
+        strong С
+        span.hidden-sm-down="трана "
+        strong С
+        span.hidden-sm-down="овершенно "
+        strong С
+        span.hidden-sm-down="лучайных "
+        strong С
+        span.hidden-sm-down="овпадений"
+    .app-header__aside
+      button.btn.btn-secondary.app-header__search-toggler((click)='toggleSearchField($event)')
+        i.fa.fa-search
+  .container
+    //form.form-inline.app-header__search-form
+    //  input.form-control(type='text', placeholder='Поиск...')
+    //
+    //   i.fa.fa-search
