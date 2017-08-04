@@ -2,35 +2,72 @@
 @import 'imports'
 
 .app-header
+  padding-top: 0
+  padding-bottom: 0
+  overflow: hidden
+  position: relative
+  &__main
+    padding: 0.5rem 0
   &__logo
     overflow-x: hidden
     @include transition(width ease-in-out 0.15s, padding ease-in-out 0.15s)
+    &-collapseable
+      display: inline-block
+      max-width: 9999px
+      overflow: hidden
+      font-size: $font-size-lg
+      line-height: inherit
+      vertical-align: top
+      @include transition(max-width ease-in-out 0.15s)
+    &-noncollapseable
+      display: inline-block
+      font-size: $font-size-lg
+      line-height: inherit
+      vertical-align: top
     .navbar-brand
+      margin: 0
+      letter-spacing: 0.04rem
+      word-spacing: -0.5rem
       font-family: 'Rubik Mono One', sans-serif
       text-transform: uppercase
   &__aside
-    display: inline-block
+    display: block
+    min-width: 2.25em
   &__search
+    &-form
     &-toggler
+      border-radius: 100%
+      width: 2.25em
+      height: 2.25em
+      padding: 0.5em
+      color: $teal
+    &-button
       border-radius: 100%
       width: 2.25em
       height: 2.25em
       padding: 0.5em
       background-color: $teal
       border-color: $gray-dark
-    .form-control
+      //margin-top: -1px
+    &-input
+      display: inline-block
       border-radius: 2.25em
       height: 2.25em
       width: 2.25em
       margin-right: -2.25em
       border-color: $gray-dark
       padding: 0.5em
-      @include transition(width ease-in-out 0.15s, padding ease-in-out 0.15s)
+      @include transition(all ease-in-out 0.15s)
   &.--search-visible
-    .app-header__search-form
-      .form-control
-        width: auto
-        padding: 0.5em 2.5em 0.5em 0.5em
+    .app-header__search-input
+      width: 100%
+      padding: 0.5em 2.5em 0.5em 0.5em
+
+@include media-breakpoint-down(md)
+  .app-header.--search-visible
+    .app-header__logo
+      .app-header__logo-collapseable
+        max-width: 0
 
 @include media-breakpoint-down(sm)
   .app-header.--search-visible
