@@ -10,6 +10,7 @@ import { NewsListComponent } from './components/news-list/news-list.component';
 import { ErrorComponent } from './components/error/error.component';
 
 import { ApiService } from './shared';
+import { ScrollService } from './shared/scroll.service';
 
 import { UIRouterModule, UIView } from '@uirouter/angular';
 import { states } from './app.routing';
@@ -44,6 +45,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   ],
   providers: [
     ApiService,
+    ScrollService,
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
   bootstrap: [UIView]
