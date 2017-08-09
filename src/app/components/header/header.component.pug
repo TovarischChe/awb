@@ -1,15 +1,11 @@
 nav.navbar.navbar-inverse.bg-inverse.app-header.row.align-items-star.flex-row.flex-nowrap.no-gutters(
   [class.--search-visible]='searchVisible'
 )
-  //form.app-header__search-form
-  //  input.form-control.app-header__search-input(type='text', placeholder='Поиск...')
-  //  button.btn.btn-secondary.app-header__search-button()
-  //    i.fa.fa-search
-  .app-header__main.col-6.col-md-8
+  .app-header__main.col-7.col-md-8
     .d-flex.flex-row.justify-content-between.align-items-start
       .app-header__aside
       .app-header__logo
-        a.navbar-brand(uiSref="app.news")
+        a.navbar-brand(uiSref='app.news')
           strong.app-header__logo-noncollapseable С
           span.hidden-sm-down.app-header__logo-collapseable
             |трана&nbsp;
@@ -26,8 +22,15 @@ nav.navbar.navbar-inverse.bg-inverse.app-header.row.align-items-star.flex-row.fl
         button.btn.btn-secondary.app-header__search-button((click)='toggleSearchField($event)')
           i.fa.fa-search([class.d-none]='searchVisible')
           i.fa.fa-close([class.d-none]='!searchVisible')
-  form.app-header__search-form.col-6.col-md-4
+  form.app-header__search-form.col-5.col-md-4
     .d-flex.flex-row.justify-content-start.align-items-start.px-2
-      input.form-control.app-header__search-input(type='text', placeholder='Поиск...')
-      button.btn.btn-secondary.app-header__search-button()
+      input.form-control.app-header__search-input(
+        type='text'
+        placeholder='Поиск...'
+        [(ngModel)]='searchField'
+        name='searchField'
+      )
+      button.btn.btn-link.app-header__search-eraser([class.d-none]='!searchField.length' (click)='clearSearchField()')
+        i.fa.fa-trash
+      button.btn.btn-secondary.app-header__search-button((click)='submitSearchField()')
         i.fa.fa-search
