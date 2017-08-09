@@ -2,10 +2,11 @@
 @import 'imports'
 
 .app-header
-  padding-top: 0
-  padding-bottom: 0
+  padding: 0
   overflow: hidden
   position: relative
+  width: 150%
+  @include transition(margin-left ease-in-out 0.15s)
   &__main
     padding: 0.5rem 0
   &__logo
@@ -33,8 +34,11 @@
   &__aside
     display: block
     min-width: 2.25em
+    padding: 0 0.5rem
   &__search
     &-form
+      padding: 0.5rem
+      background: darken($gray-dark, 5%)
     &-toggler
       border-radius: 100%
       width: 2.25em
@@ -48,7 +52,6 @@
       padding: 0.5em
       background-color: $teal
       border-color: $gray-dark
-      //margin-top: -1px
     &-input
       display: inline-block
       border-radius: 2.25em
@@ -57,23 +60,21 @@
       margin-right: -2.25em
       border-color: $gray-dark
       padding: 0.5em
-      @include transition(all ease-in-out 0.15s)
   &.--search-visible
+    margin-left: -50%
     .app-header__search-input
       width: 100%
       padding: 0.5em 2.5em 0.5em 0.5em
 
 @include media-breakpoint-down(md)
-  .app-header.--search-visible
-    .app-header__logo
-      .app-header__logo-collapseable
-        max-width: 0
-
-@include media-breakpoint-down(sm)
-  .app-header.--search-visible
-    .app-header__logo
-      width: 0
-      padding: 0
+  .app-header
+    width: 200%
+    &.--search-visible
+      margin-left: -90%
+    //&.--search-visible
+    //  .app-header__logo
+    //    width: 0
+    //    padding: 0
 
 @keyframes spin
   from
