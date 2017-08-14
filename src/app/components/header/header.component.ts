@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'ac-header',
@@ -7,17 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   searchVisible = false;
+  searchField: string = '';
 
   constructor() {
-    // Do stuff
   }
 
   ngOnInit() {
-    // console.log('Header component');
   }
 
   toggleSearchField() {
     this.searchVisible = !this.searchVisible;
+  }
+
+  submitSearchField() {
+    console.debug(this.searchField);
+  }
+
+  clearSearchField() {
+    this.searchField = '';
   }
 
 }
