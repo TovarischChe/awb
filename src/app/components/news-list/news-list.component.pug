@@ -1,3 +1,3 @@
 .container
-  .list-group
-    a.list-group-item.list-group-item-action(*ngFor='let article of news' uiSref=".detail" [uiParams]="{ articleCode: article.code }" uiSrefActive="active") {{article.name}}
+  .list-group(*ngFor='let page of pages')
+    a.list-group-item.list-group-item-action(*ngFor='let article of page.items' uiSref=".detail" [uiParams]="{ articleCode: article.code }" uiSrefActive="active") {{article.name}}
