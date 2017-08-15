@@ -11,6 +11,9 @@ import { ErrorComponent } from './components/error/error.component';
 
 import { ApiService } from './shared';
 import { ScrollService } from './shared/scroll.service';
+import { Statesman } from './shared/statesman.service';
+
+import { OnScreenEnterDirective } from './directives/on-screen-enter.directive';
 
 import { UIRouterModule, UIView } from '@uirouter/angular';
 import { states } from './app.routing';
@@ -42,10 +45,12 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     HeaderComponent,
     MainDialogComponent, MainDialogInnerComponent,
     NewsListComponent,
+    OnScreenEnterDirective
   ],
   providers: [
     ApiService,
     ScrollService,
+    Statesman,
     { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
   ],
   bootstrap: [UIView]

@@ -1,3 +1,10 @@
-.container
-  .list-group
-    a.list-group-item.list-group-item-action(*ngFor='let article of news' uiSref=".detail" [uiParams]="{ articleCode: article.code }" uiSrefActive="active") {{article.name}}
+.container.pt-5
+  .list-group.mb-2.mt-2(*ngFor='let page of pages' adOnScreenEnter (screenEnter)='updatePageUrl(page.page)' (screenLeave)='leave(page.page)' [attr.page]='page.page')
+    a.list-group-item.list-group-item-action(
+      *ngFor='let article of page.items'
+      uiSref=".detail"
+      [uiParams]="{ articleCode: article.code }"
+      uiSrefActive="active"
+    )
+      .d-flex.w-100.justify-content-between
+        h5.mb-4.mt-4 {{article.name}}
