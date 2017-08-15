@@ -98,7 +98,6 @@ export class NewsListComponent implements OnInit {
   ngOnInit() {
     let newPage = _.clone(this.page);
     newPage.page = this.pages.length + 1;
-    console.debug(newPage)
     this.pages.push(newPage);
   }
 
