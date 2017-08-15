@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ScrollService } from '../../shared/scroll.service';
+import { Statesman } from '../../shared/Statesman.service';
 import * as _ from 'lodash';
 
 @Component({
   selector: 'ac-news-list',
-  templateUrl: './news-list.component.pug'
+  templateUrl: './news-list.component.pug',
+  providers: [Statesman],
+  // directives: [OnScreenEnterDirective]
 })
 export class NewsListComponent implements OnInit {
   pages = [];
@@ -84,9 +87,8 @@ export class NewsListComponent implements OnInit {
     ]
   };
 
-  constructor(private scrollService: ScrollService) {
+  constructor(private scrollService: ScrollService, private statesman: Statesman) {
     this.scrollService.$WindowScrolledLeft10.subscribe(() => {
-      console.log('10% left, push new page');
       let newPage = _.clone(this.page);
       newPage.page = this.pages.length + 1;
       this.pages.push(newPage);
@@ -96,7 +98,16 @@ export class NewsListComponent implements OnInit {
   ngOnInit() {
     let newPage = _.clone(this.page);
     newPage.page = this.pages.length + 1;
+    console.debug(newPage)
     this.pages.push(newPage);
+  }
+
+  updatePageUrl(page) {
+    this.statesman.go('current', {page});
+  }
+
+  leave(page) {
+    console.debug('leave', page);
   }
 
 }
