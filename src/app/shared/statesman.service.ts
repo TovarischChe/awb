@@ -22,12 +22,16 @@ export class Statesman {
     private stateService: StateService,
     private transitionService: TransitionService) {}
 
-  public go(stateName, stateParams) {
+  public go(stateName, stateParams = <any>{}) {
     if (stateParams.page && stateParams.page === 1) {
       stateParams.page = null;
     }
     if (stateName === 'current') {
       stateName = this.uiRouter.globals.$current.name;
+    } else if (stateName === 'back') {
+      let previousState = this.getPreviousState();
+      stateName = previousState.stateName;
+      stateParams = previousState.stateParams;
     }
     if (
         (this.stateService.href(
@@ -51,13 +55,18 @@ export class Statesman {
   }
 
   public getPreviousState() {
-    return this.statesHistory[this.statesHistory.length - 1];
+    if (this.statesHistory.length) {
+      return this.statesHistory[this.statesHistory.length - 1];
+    } else {
+      return {stateName: '/', stateParams: {}};
+    }
   }
 
   private saveState() {
     if (this.statesHistory.length >= this.savingHistoryOptions.maxLength) { this.statesHistory.shift(); }
-    this.statesHistory.push(this.stateService.href(
-        this.uiRouter.globals.$current.name,
-        this.uiRouter.globals.params));
+    this.statesHistory.push({
+      stateName: this.uiRouter.globals.$current.name,
+      stateParams: this.uiRouter.globals.params
+    });
   }
 }

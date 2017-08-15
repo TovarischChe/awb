@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UIRouter, Transition, StateService } from '@uirouter/angular';
+import { UIRouter } from '@uirouter/angular';
+import { Statesman } from '../../shared/statesman.service';
 
 @Component({
   selector: 'ac-main-dialog',
@@ -9,7 +10,7 @@ import { UIRouter, Transition, StateService } from '@uirouter/angular';
 export class MainDialogComponent implements OnInit {
   dialogRef = {};
 
-  constructor(private modalService: NgbModal, private transition: Transition, private stateService: StateService) {}
+  constructor(private modalService: NgbModal, private statesman: Statesman) {}
 
   ngOnInit() {
     this.dialogRef = this.modalService.open(
@@ -18,13 +19,9 @@ export class MainDialogComponent implements OnInit {
         size: 'lg',
       }
     ).result.then(() => {
-      if (this.transition.from().name) {
-        this.stateService.go(this.transition.from().name, {notify: false, reload: false});
-      } else {
-        this.stateService.go('^', {notify: false, reload: false});
-      }
+      this.statesman.go('back');
     }).catch(() => {
-      this.stateService.go('^', {notify: false, reload: false});
+      this.statesman.go('back');
     });
   }
 }
