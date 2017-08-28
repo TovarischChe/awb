@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MainDialogComponent, MainDialogInnerComponent } from './components/main-dialog/main-dialog.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { ErrorComponent } from './components/error/error.component';
+import { ArticleListElementComponent, ArticleListElementTypeStandardComponent, ArticleListElementTypeLargeComponent } from './components/article-list-element/article-list-element.component';
 
 import { ApiService } from './shared';
 import { ScrollService } from './shared/scroll.service';
@@ -45,6 +46,9 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     HeaderComponent,
     MainDialogComponent, MainDialogInnerComponent,
     NewsListComponent,
+    ArticleListElementComponent,
+    ArticleListElementTypeStandardComponent,
+    ArticleListElementTypeLargeComponent,
     OnScreenEnterDirective
   ],
   providers: [

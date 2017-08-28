@@ -16,7 +16,6 @@ export class OnScreenEnterDirective {
       // Скроллим вниз
       if (scrollState.direction) {
         // Если низ блока ниже середины экрана && верх блока выше середины экрана
-        // debugger
         if (this.element.nativeElement.offsetTop + this.element.nativeElement.offsetHeight >
             scrollState.position + this.scrollContainerHeight / 2
             && this.element.nativeElement.offsetTop <= scrollState.position + this.scrollContainerHeight / 2

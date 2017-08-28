@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { UIRouter, StateService, TransitionService } from '@uirouter/angular';
-// import * as _ from 'lodash';
 
 export class StatesmanEvent {
   constructor(public stateName: string, public stateParams: object) {

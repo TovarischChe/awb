@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   searchVisible = false;
-  searchField: string = '';
+  searchField = '';
 
   constructor() {
   }
@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
   }
 
   submitSearchField() {
-    console.debug(this.searchField);
   }
 
   clearSearchField() {

@@ -1,0 +1,7 @@
+a.list-group-item.list-group-item-action(
+    uiSref=".detail"
+    [uiParams]="{ articleCode: article.code }"
+    uiSrefActive="active"
+  )
+    .d-flex.w-100.justify-content-between
+      h5.mb-4.mt-4 {{article.name}}

@@ -1,5 +1,9 @@
 .container.pt-5
-  .list-group.mb-2.mt-2(*ngFor='let page of pages' adOnScreenEnter (screenEnter)='updatePageUrl(page.page)' (screenLeave)='leave(page.page)' [attr.page]='page.page')
+  .list-group.mb-2.mt-2(
+      *ngFor='let page of pages'
+      adOnScreenEnter (screenEnter)='updatePageUrl(page.page)'
+      [attr.page]='page.page'
+    )
     a.list-group-item.list-group-item-action(
       *ngFor='let article of page.items'
       uiSref=".detail"

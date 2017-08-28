@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ScrollService } from '../../shared/scroll.service';
-import { Statesman } from '../../shared/Statesman.service';
+import { Statesman } from '../../shared/statesman.service';
 import * as _ from 'lodash';
 
 @Component({
   selector: 'ac-news-list',
   templateUrl: './news-list.component.pug',
   providers: [Statesman],
-  // directives: [OnScreenEnterDirective]
 })
 export class NewsListComponent implements OnInit {
   pages = [];
@@ -15,6 +14,7 @@ export class NewsListComponent implements OnInit {
     page: null,
     items: [
       {
+        type: 'standard',
         code: 'new-phantom',
         name: 'Представлен новый Rolls-Royce Phantom',
         image: {
@@ -22,6 +22,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'large',
         code: 'borgward-isabella',
         name: 'Марка Borgward вернет классическую модель «Изабелла»',
         image: {
@@ -29,6 +30,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'standard',
         code: 'new-phantom',
         name: 'Представлен новый Rolls-Royce Phantom',
         image: {
@@ -36,6 +38,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'large',
         code: 'borgward-isabella',
         name: 'Марка Borgward вернет классическую модель «Изабелла»',
         image: {
@@ -43,6 +46,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'standard',
         code: 'new-phantom',
         name: 'Представлен новый Rolls-Royce Phantom',
         image: {
@@ -50,6 +54,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'large',
         code: 'borgward-isabella',
         name: 'Марка Borgward вернет классическую модель «Изабелла»',
         image: {
@@ -57,6 +62,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'standard',
         code: 'new-phantom',
         name: 'Представлен новый Rolls-Royce Phantom',
         image: {
@@ -64,6 +70,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'large',
         code: 'borgward-isabella',
         name: 'Марка Borgward вернет классическую модель «Изабелла»',
         image: {
@@ -71,6 +78,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'standard',
         code: 'new-phantom',
         name: 'Представлен новый Rolls-Royce Phantom',
         image: {
@@ -78,6 +86,7 @@ export class NewsListComponent implements OnInit {
         }
       },
       {
+        type: 'large',
         code: 'borgward-isabella',
         name: 'Марка Borgward вернет классическую модель «Изабелла»',
         image: {
@@ -104,9 +113,4 @@ export class NewsListComponent implements OnInit {
   updatePageUrl(page) {
     this.statesman.go('current', {page});
   }
-
-  leave(page) {
-    console.debug('leave', page);
-  }
-
 }
